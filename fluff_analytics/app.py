@@ -67,7 +67,7 @@ def load_match_data(puuid, conn, registered_users) -> None:
 
 
 if __name__ == "__main__":
-    conn = create_connection("./test.db")
+    conn = create_connection("./fluff.db")
     setup_tables(conn)
     x = get_registered_summoners_name(conn)
     registered_users = list(itertools.chain(*x))

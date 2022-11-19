@@ -26,7 +26,7 @@ func getPUUID(summoner_name string) Summoner {
 		log.Fatal(err)
 	}
 	req.Header.Set("X-Riot-Token", os.Getenv("API_KEY"))
-	
+
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -47,7 +47,7 @@ func getPUUID(summoner_name string) Summoner {
 
 func insertSummoner(summoner Summoner) {
 	insertNewSummoner := `INSERT OR IGNORE INTO summoners(name, puuid) VALUES(?,?)`
-	db, err := sql.Open("sqlite3", "./test.db")
+	db, err := sql.Open("sqlite3", "./fluff.db")
 	if err != nil {
 		log.Fatal(err)
 	}
