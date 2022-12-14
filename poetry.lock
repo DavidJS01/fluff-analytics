@@ -1,4 +1,12 @@
 [[package]]
+name = "airflow"
+version = "0.6"
+description = "Placeholder for the old Airflow package"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "certifi"
 version = "2022.9.24"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -59,9 +67,12 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "7821a2d81a1d55c0653749e1899f0add9fff463a19f92e4c93d75784026c23c4"
+content-hash = "76991ccda746749d16454ee4b886fe1179f2193f8254dbdcffa4fae46307f9f5"
 
 [metadata.files]
+airflow = [
+    {file = "airflow-0.6.tar.gz", hash = "sha256:a54d363e92af87c2ff40ac4c22944106cb8afbc2d8d09aba85e390b68ba01d97"},
+]
 certifi = [
     {file = "certifi-2022.9.24-py3-none-any.whl", hash = "sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382"},
     {file = "certifi-2022.9.24.tar.gz", hash = "sha256:0d9c601124e5a6ba9712dbc60d9c53c21e34f5f641fe83002317394311bdce14"},
