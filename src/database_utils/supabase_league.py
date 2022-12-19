@@ -33,7 +33,12 @@ def insert_table_data(table_name: str, data: dict) -> None:
         raise e
 
 
-def get_all_game_hashes():
+def get_all_game_hashes() -> list:
+    """
+    function that queries the supabase database, returning a list of all
+    game_hashes recording in the `games` table.
+    :return: list of strings, each with a particular game hash
+    """
     try:
         client = create_supabase_client()
         data = client.table("games").select("match_hash").execute()
@@ -45,7 +50,12 @@ def get_all_game_hashes():
         raise e
 
 
-def get_all_summoners_data():
+def get_all_summoners_data() -> list:
+    """
+    function that runs a select * query on the `summoners` table,
+    returning a list of tuples in [(summoner_name, summoner_puuid)] format
+    :returns: list of tuples, each tuple with a name and puuid
+    """
     try:
         client = create_supabase_client()
         data = client.table("summoners").select("*").execute()

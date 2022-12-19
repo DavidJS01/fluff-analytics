@@ -1,4 +1,4 @@
-env.sh
+scripts/env.sh
 __pycache__
 example_response.json
 .vscode

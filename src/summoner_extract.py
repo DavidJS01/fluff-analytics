@@ -1,11 +1,12 @@
-from datetime import datetime
 import hashlib
-
-
 import requests
 import os
 
-from database import get_all_summoners_data, insert_game_data, get_all_game_hashes
+from database_utils.supabase_league import (
+    get_all_summoners_data,
+    insert_game_data,
+    get_all_game_hashes,
+)
 
 URLS = {
     "summoner": "https://na1.api.riotgames.com/lol",
@@ -32,7 +33,6 @@ def get_summoner_puuid(name: str):
     endpoint = API_ENDPOINTS["get_summoner_metadata"].format(summoner_name=name)
     url = f"{URLS['summoner']}/{endpoint}"
     r = requests.get(url, headers=HEADERS).json()
-    print(r)
     return r["puuid"]
 
 
@@ -40,7 +40,10 @@ def extract_match_data(match_id: str) -> None:
     endpoint = API_ENDPOINTS["get_match_metadata"].format(match_id=match_id)
     url = f"{URLS['match']}/{endpoint}"
     r = requests.get(url, headers=HEADERS).json()
-    return r["info"]
+    if "info" not in r.keys():
+        return None
+    else:
+        return r["info"]
 
 
 def transform_match_data(
@@ -75,16 +78,16 @@ def transform_match_data(
                 }
                 return data
             else:
-                return None
+                continue
 
 
 def load_match_data(puuid, summoner_name, game_hashes) -> None:
     match_list = get_match_list(puuid)
     for game_id in match_list:
         game_hash = hashlib.md5(f"{game_id}{summoner_name}".encode("utf-8")).hexdigest()
-        if game_hash in game_hashes:
-            continue
         raw_match_data = extract_match_data(game_id)
+        if (game_hash in game_hashes) or (raw_match_data is None):
+            continue
         transformed_match_data = transform_match_data(
             raw_match_data, game_id, summoner_name
         )
@@ -94,10 +97,16 @@ def load_match_data(puuid, summoner_name, game_hashes) -> None:
             continue
 
 
-if __name__ == "__main__":
-    summoner_puuids = get_all_summoners_data()
+def main():
+    # get all registered summoners in the db
+    summoners = get_all_summoners_data()
+    # get a list of all games that are already in the db
     game_hashes = get_all_game_hashes()
-    for row in summoner_puuids:
-        summoner_puuid = row["puuid"]
-        summoner_name = row["summoner_name"]
+    for summoner in summoners:
+        summoner_puuid = summoner["puuid"]
+        summoner_name = summoner["summoner_name"]
         load_match_data(summoner_puuid, summoner_name, game_hashes)
+
+
+if __name__ == "__main__":
+    main()

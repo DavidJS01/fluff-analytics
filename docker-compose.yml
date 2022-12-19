@@ -1,0 +1,17 @@
+# docker-compose.yml
+version: '3'
+services:
+  server:
+      container_name: server
+      build:
+        context: .
+        dockerfile: ./Dockerfile
+      environment:
+        - API_KEY=${API_KEY}
+        - SUPABASE_URL=${SUPABASE_URL}
+        - SUPABASE_KEY=${SUPABASE_KEY}
+      restart: always
+      ports:
+        - '5000:5000'
+      expose:
+        - '5000'
