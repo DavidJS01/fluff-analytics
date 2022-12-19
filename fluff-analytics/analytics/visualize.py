@@ -4,9 +4,6 @@ from database_utils.queries import EXAMPLE_SELECT_WIN_LOSSES
 import plotly.express as px
 
 
-conn = create_postgres_conn()
-
-
 def visualize_winloss(conn):
     # get dataframe from query
     df = pd.read_sql(EXAMPLE_SELECT_WIN_LOSSES, conn)
@@ -23,7 +20,11 @@ def visualize_winloss(conn):
     # show figure in browser
     fig.show()
     # save figure html to folder
-    fig.write_html("./visualizations/win_loss.html")
+    fig.write_html("./assets/visualizations_html/win_loss.html")
+    # save figure image to folder
+    fig.write_image("./visualizations/win_loss.png", format="png")
 
 
-visualize_winloss(conn)
+if __name__ == "__main__":
+    conn = create_postgres_conn()
+    visualize_winloss(conn)
