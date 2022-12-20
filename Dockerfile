@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.8-slim-buster
+FROM python:3.8.3-slim
 
-# copy the requirements file into the image
 COPY . .
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install -r fluff-analytics/requirements.txt
+# copy the requirements file into the image
 
-RUN pip install -r requirements.txt
-# switch working directory
 
 EXPOSE 5000
 
@@ -14,5 +15,5 @@ EXPOSE 5000
 
 # configure the container to run in an executed manner
 
-WORKDIR /src
+WORKDIR /fluff-analytics
 CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0"]

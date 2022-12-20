@@ -1,0 +1,5 @@
+export API_KEY="RGAPI-54cad617-5b10-4eb9-84bd-85bae11b1987";
+export SUPABASE_URL="https://hthwpmjyxjdyknribyqx.supabase.co";
+export SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0aHdwbWp5eGpkeWtucmlieXF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzEwNDAyMTYsImV4cCI6MTk4NjYxNjIxNn0.MkIQbJtHWe5QrDWcrRqNUu-jtzRDoLycd9LGGl7q5tw"
+export SUPABASE_DB_PASSWORD="iQgP8!LQ5FuTrvj"
+export SUPABASE_DB_HOST="db.hthwpmjyxjdyknribyqx.supabase.co"
