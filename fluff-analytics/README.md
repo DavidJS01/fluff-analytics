@@ -7,3 +7,12 @@
 5. Set up your `league_analytics/scripts/env.sh` script with the needed API auth configurations
 6. Install Docker and docker-compose 
 7. Run `docker-compose up -d`
+
+### Adding a new summoner
+1. Navigate to http://localhost:5000/
+2. Enter a name
+3. Click submit
+
+### Populating/refreshing a new summoner's data
+1. `cd` into fluff-analytics
+2. `poetry run python3 summoner_extract.py`
