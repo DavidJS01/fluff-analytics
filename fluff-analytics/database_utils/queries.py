@@ -24,10 +24,10 @@ SELECT_TOP_5_Q_CASTS = """
     author: Bradley Love
     query that gets the 5 champs that cast their Q's the most
     */
-    SELECT champion, SUM(q_casts) q_cast_total 
+    SELECT champion, SUM(q_casts) as q_cast_total 
     FROM games
     GROUP BY champion
-    ORDER BY SUM(q_casts) DESC
+    ORDER BY q_cast_total DESC
     LIMIT 5;
     
 """
